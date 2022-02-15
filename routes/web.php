@@ -18,6 +18,4 @@ Route::get('/', function () {
 });
 
 
-Route::get('/my_page', function () {
-    return 'this is my page';
-});
+Route::get('/my_page', 'MyPlaceController@index');
