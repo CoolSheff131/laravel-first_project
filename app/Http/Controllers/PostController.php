@@ -51,4 +51,11 @@ class PostController extends Controller
         ]);
         dd('updated');
     }
+
+    public function delete()
+    {
+        $post = Post::find(4);
+        $post->delete();
+        dd('deleted');
+    }
 }
