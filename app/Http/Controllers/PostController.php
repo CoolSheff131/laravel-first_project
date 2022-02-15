@@ -12,4 +12,30 @@ class PostController extends Controller
         $post = Post::find(1);
         dump($post);
     }
+
+    public function create()
+    {
+        $postsArr = [
+            [
+                'title' => 'title',
+                'content' => 'cont',
+                'image' => 'img',
+                'likes' => 20,
+                'is_published' => 1,
+            ],
+            [
+                'title' => 'another',
+                'content' => 'cont',
+                'image' => 'img',
+                'likes' => 20,
+                'is_published' => 1,
+            ],
+        ];
+
+        foreach ($postsArr as $item) {
+            Post::create($item);
+        }
+
+        dd('created');
+    }
 }
