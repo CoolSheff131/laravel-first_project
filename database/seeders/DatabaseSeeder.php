@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         Category::factory(10)->create();
         $tags = Tag::factory(50)->create();
-        $posts = Post::factory(10)->create();
+        $posts = Post::factory(200)->create();
 
         foreach ($posts as $post) {
             $tagsIds = $tags->random(5)->pluck('id');
