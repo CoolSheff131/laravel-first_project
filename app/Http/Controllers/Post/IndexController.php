@@ -13,8 +13,12 @@ class IndexController extends BaseController
     {
         $this->authorize('view', auth()->user());
         $data = $request->validated();
+
+        $page = $data['page'] ?? 1;
+        $perPage = $data['per_page'] ?? 10;
+
         $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($data)]);
-        $posts = Post::filter($filter)->paginate(10);
+        $posts = Post::filter($filter)->paginate($perPage, ['*'], 'page', $page);
 
         return view('post.index', compact('posts'));
     }
