@@ -23,6 +23,11 @@ class PostController extends Controller
         return view('post.show', compact('post'));
     }
 
+    public function edit(Post $post)
+    {
+        return view('post.edit', compact('post'));
+    }
+
     public function store()
     {
         $data = request()->validate([
@@ -34,17 +39,15 @@ class PostController extends Controller
         return redirect()->route('post.index');
     }
 
-    public function update()
+    public function update(Post $post)
     {
-        $post = Post::find(4);
-        $post->update([
-            'title' => 'updated',
-            'content' => 'updated',
-            'image' => 'updated',
-            'likes' => 20,
-            'is_published' => 0,
+        $data = request()->validate([
+            'title' => 'string',
+            'content' => 'string',
+            'image' => 'string',
         ]);
-        dd('updated');
+        $post->update($data);
+        return redirect()->route('post.show', $post->id);
     }
 
     public function delete()
