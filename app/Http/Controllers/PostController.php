@@ -57,6 +57,12 @@ class PostController extends Controller
         dd('deleted');
     }
 
+    public function destroy(Post $post)
+    {
+        $post->delete();
+        return redirect()->route('post.index');
+    }
+
     public function firstOrCreate()
     {
         $anotherPost = [
