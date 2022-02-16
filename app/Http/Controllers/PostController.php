@@ -10,33 +10,23 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('posts', compact('posts'));
+        return view('post.index', compact('posts'));
     }
 
     public function create()
     {
-        $postsArr = [
-            [
-                'title' => 'title',
-                'content' => 'cont',
-                'image' => 'img',
-                'likes' => 20,
-                'is_published' => 1,
-            ],
-            [
-                'title' => 'another',
-                'content' => 'cont',
-                'image' => 'img',
-                'likes' => 20,
-                'is_published' => 1,
-            ],
-        ];
+        return view('post.create');
+    }
 
-        foreach ($postsArr as $item) {
-            Post::create($item);
-        }
-
-        dd('created');
+    public function store()
+    {
+        $data = request()->validate([
+            'title' => 'string',
+            'content' => 'string',
+            'image' => 'string',
+        ]);
+        Post::create($data);
+        return redirect()->route('post.index');
     }
 
     public function update()
